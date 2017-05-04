@@ -6,7 +6,7 @@ class Main extends React.Component {
           <div>
             <div className="row">
               <div className="column small-centered medium-6 large-4">
-                <h1>React Boilerplate</h1>
+                <h1>Learn React</h1>
                 {/* Router tarafından gelen bileşen aşağıda görüntülenecek. */}
                 {this.props.children}
               </div>
