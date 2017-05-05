@@ -23,3 +23,5 @@ class App extends Component {
 }
 
 render(<App />, document.getElementById('root'));
+
+require('./redux-example.jsx');
