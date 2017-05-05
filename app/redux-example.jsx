@@ -13,5 +13,12 @@ let changeProp = (obj) => {
   return newObj;
 }
 
-console.log(firstState);
-console.log(changeProp(firstState));
+let reducer = (state, action) => {
+  state = state || {name : "Anomim"};
+  return state;
+}
+
+let store = redux.createStore(reducer);
+
+let currenState = store.getState();
+console.log("currenState", currenState);
