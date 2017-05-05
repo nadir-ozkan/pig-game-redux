@@ -15,10 +15,27 @@ let changeProp = (obj) => {
 
 let reducer = (state, action) => {
   state = state || {name : "Anomim"};
-  return state;
+
+  switch (action.type) {
+    case "CHANGE_NAME":
+        return {
+          ...state,
+          name : action.name
+        }
+      break;
+    default:
+      return state;
+  }
 }
 
 let store = redux.createStore(reducer);
 
 let currenState = store.getState();
 console.log("currenState", currenState);
+
+let action = {
+  type : "CHANGE_NAME",
+  name : "Nadir"
+}
+
+store.dispatch(action);

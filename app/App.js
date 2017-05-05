@@ -24,5 +24,5 @@ class App extends Component {
 
 render(<App />, document.getElementById('root'));
 
-// require('./redux-example.jsx');
-require('./redux-todo-example.jsx');
+require('./redux-example.jsx');
+// require('./redux-todo-example.jsx');
