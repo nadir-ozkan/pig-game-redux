@@ -4,8 +4,11 @@ class Dice extends React.Component {
   constructor(props){
     super(props);
   }
+
   render(){
-    let diceSrc = "images/dice-" + this.props.dice +".png"
+    let {dice} = this.props;
+    let diceSrc = "images/dice-" + dice.dice +".png";
+    if (!dice.isDiceVisible) return null;
     return(
       <img src= {diceSrc} alt="Dice" className="dice"/>
     );

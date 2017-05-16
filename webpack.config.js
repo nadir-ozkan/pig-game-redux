@@ -6,17 +6,7 @@ var webpack = require('webpack');
 var config = {
   devtool: 'eval-source-map',
   entry: [
-    'script!jquery/dist/jquery.min.js',
     __dirname + "/app/App.js",
-  ],
-  externals: {
-    jquery: 'jQuery'
-  },
-  plugins: [
-    new webpack.ProvidePlugin({
-      '$': 'jquery',
-      'jQuery': 'jquery'
-    })
   ],
   output: {
     path: __dirname + "/public",

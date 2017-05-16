@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 
 class PlayerPanel extends React.Component {
 
+  constructor(props){
+    super(props);
+  }
+
   render(){
     let {player} = this.props;
     let divClass = player.isActive ? "player-panel active" : "player-panel";
@@ -10,10 +14,10 @@ class PlayerPanel extends React.Component {
     return(
       <div className={divClass}>
           <div className="player-name" id="name-0">{player.name}</div>
-          <div className="player-score" id="score-0">{player.currentScore}</div>
+          <div className="player-score" id="score-0">{player.totalScore}</div>
           <div className="player-current-box">
               <div className="player-current-label">Current</div>
-              <div className="player-current-score">{player.totalScore}</div>
+              <div className="player-current-score">{player.currentScore}</div>
           </div>
       </div>
     );
