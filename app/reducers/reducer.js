@@ -9,25 +9,28 @@ let changeActivePlayer = (players) => {
   });
 }
 
-var updateScores = (state, action) => {
+var updateState = (state, action) => {
   let players = state.players.slice(0);
   let dice = state.dice;
   let activePlayer = players[getActivePlayer(state)];
   let isGameOver = state.isGameOver;
 
   switch (action.type) {
-
+    case "ROLL_DICE" :
+      break;
     case "UPDATE_SCORES":
       if (dice.dice == 1){
         alert("Maalesef 1 geldi!");
         activePlayer.currentScore = 0;
         players = changeActivePlayer(players);
+        dice.previousDice = undefined;
       } else {
         if (dice.dice==6 && dice.previousDice==6){
           alert("Maalesef ark arkaya iki 6 attınız!");
           activePlayer.currentScore = 0;
           activePlayer.totalScore = 0;
           players = changeActivePlayer(players);
+          dice.previousDice = undefined;
         } else {
           activePlayer.currentScore += dice.dice;
         }
@@ -38,11 +41,22 @@ var updateScores = (state, action) => {
       activePlayer.currentScore = 0;
       if (activePlayer.totalScore >= 20){
         activePlayer.isWinner = true;
-        state.isGameOver = true;
+        isGameOver = true;
       } else {
         players = changeActivePlayer(players);
+        dice.previousDice = undefined;
       }
-
+      break;
+    case "NEW_GAME" :
+      players[0].totalScore = 0;
+      players[1].totalScore = 0,
+      players[0].currentScore = 0;
+      players[1].currentScore = 0;
+      players[0].isWinner = false;
+      players[1].isWinner = false;
+      players[0].isActive = true;
+      players[1].isActive = false;
+      isGameOver = false;
       break;
     default:
       return state;
@@ -79,6 +93,9 @@ var updateDice = (state, action) => {
       case "HOLD_SCORE" :
         dice.isDiceVisible = false;
         break;
+      case "NEW_GAME" :
+        dice.isDiceVisible = false;
+        break;
     default:
       return dice;
   }
@@ -89,18 +106,13 @@ var updateDice = (state, action) => {
 var reducer = (state, action) => {
   switch (action.type){
     case 'ROLL_DICE':
-        return {
-          ...state,
-          dice : updateDice(state, action)
-        }
+      return updateState(state, action);
     case 'UPDATE_SCORES':
-        return updateScores(state, action);
+        return updateState(state, action);
     case 'HOLD_SCORE':
-        return {
-          ...state,
-          players : updateScores(state, action),
-          dice : updateDice(state, action)
-        }
+        return updateState(state, action);
+    case 'NEW_GAME':
+        return updateState(state, action);
     default:
       return state;
   }

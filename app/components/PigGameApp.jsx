@@ -11,25 +11,23 @@ var store = getStore();
 class PigGameApp extends React.Component {
     constructor(props){
       super(props);
-      this.isGameOver = props.isGameOver;
     }
 
     rollIt() { return Math.floor(Math.random() * 6) + 1; }
 
     handleRollDiceClick() {
-      if (this.isGameOver) return;
+      if (this.props.isGameOver) return;
       let dice = this.rollIt();
       store.dispatch(Actions.rollDice(dice));
       store.dispatch(Actions.updateScores());
     }
 
     handleHoldClick() {
-      if (this.isGameOver) return;
+      if (this.props.isGameOver) return;
       store.dispatch(Actions.holdScore());
     }
 
     handleNewGameClick() {
-      if (this.isGameOver) return;
       store.dispatch(Actions.newGame());
     }
 
