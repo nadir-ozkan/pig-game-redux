@@ -42,6 +42,7 @@ var updateState = (state, action) => {
       if (activePlayer.totalScore >= 20){
         activePlayer.isWinner = true;
         isGameOver = true;
+        alert("Kazanan : " + activePlayer.name + " !");
       } else {
         players = changeActivePlayer(players);
         dice.previousDice = undefined;

@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import PlayerPanel from './PlayerPanel.jsx';
 import Dice from './Dice.jsx';
+import ModalDialog from './ModalDialog.jsx';
+
 import Actions from '../actions/actions.js';
 import {getStore} from '../stores/store.js';
 
@@ -31,6 +33,14 @@ class PigGameApp extends React.Component {
       store.dispatch(Actions.newGame());
     }
 
+    showModal(){
+      document.getElementById('myModal').style.display = "block";
+    }
+
+    componentDidMount(){
+      this.showModal();
+    }
+
     render() {
         let {players, dice} = this.props;
         return (
@@ -41,6 +51,8 @@ class PigGameApp extends React.Component {
               <button className="btn-roll" onClick={this.handleRollDiceClick.bind(this)}><i className="ion-ios-loop"></i>Roll dice</button>
               <button className="btn-hold" onClick={this.handleHoldClick.bind(this)}><i className="ion-ios-download-outline"></i>Hold</button>
               <Dice dice={dice}></Dice>
+              <a id="rulesAndCredits" href="#" onClick={this.showModal}>Rules & Credits</a>
+              <ModalDialog headerText="Rules & Credits" footerText="Coded by Nadir Özkan" ></ModalDialog>
           </div>
         );
     }
